@@ -1,8 +1,14 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+interface AlertsProps {
+  left?: number;
+  top?: number;
+  changeStyle: boolean;
+}
+
+export const Container = styled.div<AlertsProps>`
   display: flex;
   position: absolute;
-  top: 10%;
-  left: 84%;
+  top: ${(props) => (props.changeStyle ? `${props.top}%` : `${10}%`)};
+  left: ${(props) => (props.changeStyle ? `${props.left}%` : `${84}%`)};
 `;

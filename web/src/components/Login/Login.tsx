@@ -12,7 +12,7 @@ interface ILoginProps {
   setShowHeader: (value: boolean) => void;
 }
 
-interface IAlertProps {
+export interface IAlertProps {
   type: AlertColor;
   message: string;
 }

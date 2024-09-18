@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 interface IButtonDayProps {
-  isDisabled: boolean;
+  isDisabled?: boolean;
 }
 
 export const Container = styled.div`

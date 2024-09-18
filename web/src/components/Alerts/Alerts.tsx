@@ -8,9 +8,19 @@ export interface IAlertProps {
   type: AlertColor;
   message: string;
   handleClose: () => void;
+  top?: number;
+  left?: number;
+  changeStyle?: boolean;
 }
 
-export function Alerts({ type, message, handleClose }: IAlertProps) {
+export function Alerts({
+  type,
+  message,
+  handleClose,
+  left,
+  top,
+  changeStyle = false,
+}: IAlertProps) {
   useEffect(() => {
     setTimeout(() => {
       handleClose();
@@ -18,7 +28,7 @@ export function Alerts({ type, message, handleClose }: IAlertProps) {
   });
 
   return (
-    <S.Container>
+    <S.Container left={left} top={top} changeStyle={changeStyle}>
       <Stack sx={{ width: "100%" }} spacing={2}>
         <Alert variant="filled" severity={type} onClose={() => handleClose()}>
           {message}

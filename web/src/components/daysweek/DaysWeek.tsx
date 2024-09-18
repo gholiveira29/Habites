@@ -12,29 +12,46 @@ const availableWeekDays = [
   "Sabado",
 ];
 
-export function DaysWeek() {
-  const [isChecked, setIsChecked] = useState(false);
+interface DaysWeekProps {
+  handleSetWeekDays: (value: number[]) => void;
+}
+
+export function DaysWeek({ handleSetWeekDays }: DaysWeekProps) {
+  const [weekDays, setWeekDays] = useState<number[]>([]);
   const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
-  const handleCheck = () => {
-    if (isChecked) {
-      setIsChecked(false);
+  const handleToggleWeekDays = (weekDay: number) => {
+    if (weekDays.includes(weekDay)) {
+      const weekDaysWithRemovedOne = weekDays.filter((day) => day !== weekDay);
+      setWeekDays(weekDaysWithRemovedOne);
+      handleSetWeekDays(weekDaysWithRemovedOne);
     } else {
-      setIsChecked(true);
+      const weekDaysWithAddedOne = [...weekDays, weekDay];
+      setWeekDays(weekDaysWithAddedOne);
+      handleSetWeekDays(weekDaysWithAddedOne);
     }
   };
 
   return (
     <S.Container>
-      {availableWeekDays.map((weekDay) => {
+      {availableWeekDays.map((weekDay, index) => {
         return (
           <S.CheckboxContainer key={weekDay}>
             <Checkbox
               {...label}
-              defaultChecked={isChecked}
-              sx={{ "& .MuiSvgIcon-root": { fontSize: 40 } }}
-              color="success"
-              onClick={() => handleCheck()}
+              defaultChecked={false}
+              sx={{
+                "&.Mui-checked": {
+                  color: "#7c3aed",
+                },
+                "& .MuiSvgIcon-root": {
+                  width: 40,
+                  height: 40,
+                  color: "#b893f7",
+                  borderWidth: 1,
+                },
+              }}
+              onClick={() => handleToggleWeekDays(index)}
             />
             <S.SpanWeekDays>{weekDay}</S.SpanWeekDays>
           </S.CheckboxContainer>
